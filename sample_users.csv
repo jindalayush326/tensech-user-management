@@ -1,0 +1,5 @@
+email,first_name,last_name,department,status
+ayush@gmail.com,Ayush,Jindal,Engineering,active
+suresh@gmail.com,Suresh,Raina,Finance,inactive
+amit@gmail.com,Amit,Thakur,HR,active
+invalid-email,Invalid,User,IT,active

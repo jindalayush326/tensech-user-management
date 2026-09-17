@@ -1,0 +1,457 @@
+{
+  "info": {
+    "_postman_id": "2e9c33b5-3095-450e-8dea-391f51b14ec3",
+    "name": "Tensech - Multi-tenant User Management API",
+    "description": "Postman collection for JWT authentication, tenant-isolated user management, Redis caching, and CSV bulk upload.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53652757"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "health"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "OK",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "health"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "X-Request-Id",
+              "value": "25cefe9d-d912-43b2-90ee-519de2073c53"
+            },
+            {
+              "key": "Date",
+              "value": "Thu, 17 Sep 2026 18:56:27 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "15"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"status\": \"ok\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Create User - Admin",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"ayush@gmail.com\",\n  \"first_name\": \"Ayush\",\n  \"last_name\": \"Jindal\",\n  \"department\": \"Engineering\",\n  \"status\": \"active\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/users",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "users"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Success",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"ayush@gmail.com\",\n  \"first_name\": \"Ayush\",\n  \"last_name\": \"Jindal\",\n  \"department\": \"Engineering\",\n  \"status\": \"active\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users"
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "X-Request-Id",
+              "value": "a0a7f1a4-8cd6-43e7-aa13-d0e7a5ba8b98"
+            },
+            {
+              "key": "Date",
+              "value": "Thu, 17 Sep 2026 18:55:32 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "292"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"315aa71e-963f-480f-856e-f905673106d4\",\n        \"tenant_id\": \"tenant1\",\n        \"email\": \"ayush@gmail.com\",\n        \"first_name\": \"Ayush\",\n        \"last_name\": \"Jindal\",\n        \"department\": \"Engineering\",\n        \"status\": \"active\",\n        \"created_at\": \"2026-09-17T18:55:32.5294694Z\",\n        \"updated_at\": \"2026-09-17T18:55:32.5294694Z\"\n    }\n}"
+        },
+        {
+          "name": "Fail",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"ayush@gmail.com\",\n  \"first_name\": \"Ayush\",\n  \"last_name\": \"Jindal\",\n  \"department\": \"Engineering\",\n  \"status\": \"active\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users"
+              ]
+            }
+          },
+          "status": "Conflict",
+          "code": 409,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "X-Request-Id",
+              "value": "694e0446-404a-46e6-8e2b-ec08966edec1"
+            },
+            {
+              "key": "Date",
+              "value": "Thu, 17 Sep 2026 18:55:52 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "79"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"success\": false,\n    \"error\": \"user with this email already exists for this tenant\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "List Users",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/users?page=1&limit=10&search=&status=",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "users"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "limit",
+              "value": "10"
+            },
+            {
+              "key": "search",
+              "value": ""
+            },
+            {
+              "key": "status",
+              "value": ""
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "List Users",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users?page=1&limit=10&search=&status=",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "search",
+                  "value": ""
+                },
+                {
+                  "key": "status",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "X-Request-Id",
+              "value": "f7e7b0a7-43bb-4c6f-8295-d4bd1e25a5cc"
+            },
+            {
+              "key": "Date",
+              "value": "Thu, 17 Sep 2026 18:58:18 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "600"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"success\": true,\n    \"data\": {\n        \"users\": [\n            {\n                \"id\": \"315aa71e-963f-480f-856e-f905673106d4\",\n                \"tenant_id\": \"tenant1\",\n                \"email\": \"ayush@gmail.com\",\n                \"first_name\": \"Ayush\",\n                \"last_name\": \"Jindal\",\n                \"department\": \"Engineering\",\n                \"status\": \"active\",\n                \"created_at\": \"2026-09-17T18:55:32.529Z\",\n                \"updated_at\": \"2026-09-17T18:55:32.529Z\"\n            },\n            {\n                \"id\": \"09d845bd-5785-4e39-89e8-3ed37f9d69d1\",\n                \"tenant_id\": \"tenant1\",\n                \"email\": \"john@example.com\",\n                \"first_name\": \"John\",\n                \"last_name\": \"Doe\",\n                \"department\": \"Engineering\",\n                \"status\": \"active\",\n                \"created_at\": \"2026-09-17T18:34:25.567Z\",\n                \"updated_at\": \"2026-09-17T18:34:25.567Z\"\n            }\n        ],\n        \"page\": 1,\n        \"limit\": 10,\n        \"total\": 2,\n        \"total_pages\": 1\n    }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get User By ID",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/users/{{userId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "users",
+            "{{userId}}"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Response",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "{{userId}}"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "X-Request-Id",
+              "value": "ce34ec8c-6162-47fb-912f-36b056411c16"
+            },
+            {
+              "key": "Date",
+              "value": "Thu, 17 Sep 2026 18:57:03 GMT"
+            },
+            {
+              "key": "Content-Length",
+              "value": "284"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"315aa71e-963f-480f-856e-f905673106d4\",\n        \"tenant_id\": \"tenant1\",\n        \"email\": \"ayush@gmail.com\",\n        \"first_name\": \"Ayush\",\n        \"last_name\": \"Jindal\",\n        \"department\": \"Engineering\",\n        \"status\": \"active\",\n        \"created_at\": \"2026-09-17T18:55:32.529Z\",\n        \"updated_at\": \"2026-09-17T18:55:32.529Z\"\n    }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Bulk Upload CSV - Admin",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": "{{csvFile}}"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/users/bulk-upload",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "users",
+            "bulk-upload"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "userId",
+      "value": ""
+    },
+    {
+      "key": "csvFile",
+      "value": "sample_users.csv"
+    }
+  ]
+}
